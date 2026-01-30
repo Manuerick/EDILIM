@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lim version="5.6.4">
+    <config>
+        <recursos>Recursos</recursos>
+        <idioma>0</idioma>
+        <licencia></licencia>
+        <corfondo>FF8000</corfondo>
+        <corbanda>A21A06</corbanda>
+        <cornavega>A21A06</cornavega>
+        <cormensaxes>000000</cormensaxes>
+        <cortexto>311AFF</cortexto>
+        <titulo>Comprensión Lectora</titulo>
+        <subtitulo>La hormiga y la cigarra</subtitulo>
+        <autor>Manuel Antonio Manayay Callaca</autor>
+        <iden>Manuerick</iden>
+        <informe>0</informe>
+        <botonson>0</botonson>
+        <maximizar>0</maximizar>
+        <desordenar>0</desordenar>
+        <correcto son="" modo="1" >CORRECTO</correcto>
+        <incorrecto son="" modo="1" >INCORRECTO</incorrecto>
+    </config>
+    <libro>
+        <paxina id="1" >
+              <tipo>2</tipo>
+              <imaxe posx="0" posy="0">1Hormigacigarra.jpg</imaxe>
+        </paxina>
+        <paxina id="2" >
+              <tipo>2</tipo>
+              <imaxe posx="0" posy="0">escena1.png</imaxe>
+        </paxina>
+        <paxina id="3" >
+              <tipo>2</tipo>
+              <imaxe posx="0" posy="0">escena2.png</imaxe>
+        </paxina>
+        <paxina id="4" >
+              <tipo>2</tipo>
+              <imaxe posx="0" posy="0">escena3.png</imaxe>
+        </paxina>
+        <paxina id="5" >
+              <tipo>2</tipo>
+              <imaxe posx="0" posy="0">escena4.png</imaxe>
+        </paxina>
+        <paxina id="6" >
+              <tipo>2</tipo>
+              <imaxe posx="0" posy="0">escena5.png</imaxe>
+        </paxina>
+        <paxina id="7" >
+              <tipo>2</tipo>
+              <imaxe posx="0" posy="0">escena6.jpg</imaxe>
+        </paxina>
+        <paxina id="8" >
+              <tipo>3</tipo>
+              <cabeceira>Arma el rompecabezas</cabeceira>
+              <imaxe>1Hormigacigarra.jpg</imaxe>
+              <filas>3</filas>
+              <columnas>3</columnas>
+              <reixa>1</reixa>
+            <forma>1</forma>
+        </paxina>
+        <paxina id="9" >
+              <tipo>17</tipo>
+              <cabeceira>Busca las imágenes iguales</cabeceira>
+              <parellas>Azucar2.jpg</parellas>
+              <parellas>Botella.jpg</parellas>
+              <parellas>Roca.jpg</parellas>
+              <parellas>Cuchara.jpg</parellas>
+              <parellas>Arroz.jpg</parellas>
+              <parellas>Hojas.jpg</parellas>
+              <cfondo>FF8000</cfondo>
+              <ctapa>EB1434</ctapa>
+              <tempo>90</tempo>
+        </paxina>
+        <paxina id="10" >
+              <tipo>19</tipo>
+              <cabeceira>Dale clic en las letras para formar la palabra</cabeceira>
+              <imaxe>Cigarra.jpg</imaxe>
+              <texto><![CDATA[¿Cómo se llama este personaje?]]></texto>
+              <resp texto="">Cigarra</resp>
+              <modo>0</modo>
+              <forma>0</forma>
+        </paxina>
+        <paxina id="11" >
+              <tipo>19</tipo>
+              <cabeceira>Dale clic en las letras para formar la palabra</cabeceira>
+              <imaxe>Hormiga.jpg</imaxe>
+              <texto><![CDATA[¿Cómo se llama este personaje?]]></texto>
+              <resp texto="">Hormiga</resp>
+              <modo>0</modo>
+              <forma>0</forma>
+        </paxina>
+        <paxina id="12" >
+              <tipo>4</tipo>
+              <cabeceira>Busca las palabras</cabeceira>
+              <modo>1</modo>
+              <sopa enun="">sol</sopa>
+              <sopa enun="">luna</sopa>
+              <sopa enun="">puma</sopa>
+              <sopa enun="">lana</sopa>
+              <sopa enun="">gato</sopa>
+              <sopa enun="">loma</sopa>
+              <sopa enun="">mesa</sopa>
+              <sopa enun="">pepa</sopa>
+              <enunciado>1</enunciado>
+              <colorea>0</colorea>
+              <cadro>0</cadro>
+        </paxina>
+        <paxina id="13" >
+              <tipo>7</tipo>
+              <cabeceira>Clasifica las imágenes</cabeceira>
+              <fondocaixa1 trans="100">Hormiga.jpg</fondocaixa1>
+              <fondocaixa2 trans="100">Hormiga2.jpg</fondocaixa2>
+              <caixa1>Si come</caixa1>
+              <caixa2>No come</caixa2>
+              <mini caixa="1">Arroz.jpg</mini>
+              <mini caixa="1">Azucar.jpg</mini>
+              <mini caixa="1">Hojas.jpg</mini>
+              <mini caixa="2">Botella.jpg</mini>
+              <mini caixa="2">Cuchara.jpg</mini>
+              <mini caixa="2">Roca.jpg</mini>
+              <cfondo>FF8000</cfondo>
+              <cadro>1</cadro>
+        </paxina>
+    </libro>
+</lim>

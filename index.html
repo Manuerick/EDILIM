@@ -1,0 +1,1339 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="keywords" content=""/>
+<title>Comprensión Lectora</title>
+<link rel="stylesheet" href="./sclim/lim.css?5.6.4" type="text/css" ></link>
+<link rel="stylesheet" href="./sclim/lim-px.css?5.6.4" type="text/css" ></link>
+
+<script src="./sclim/lang.js?5.6.4" type="text/javascript"></script>
+<script src="./sclim/limjs.js?5.6.4" type="text/javascript"></script>
+
+
+<style>
+/* Estilos para la portada - VERSIÓN DEFINITIVA CON INSIGNIAS DEL COLEGIO */
+.portada {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Degradado diagonal con ROJOS MÁS OSCUROS */
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(139, 0, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(220, 20, 60, 0.3) 0%, transparent 50%),
+        linear-gradient(135deg, 
+            #FFD700 0%,      /* Amarillo dorado brillante */
+            #FFA500 12%,     /* Naranja intenso */
+            #FF8C00 25%,     /* Naranja oscuro */
+            #FF4500 35%,     /* Rojo-naranja */
+            #DC143C 50%,     /* Crimson */
+            #B22222 65%,     /* Rojo ladrillo */
+            #8B0000 80%,     /* Rojo oscuro intenso */
+            #5C0000 92%,     /* Granate muy oscuro */
+            #3A0000 100%     /* Rojo vino SUPER oscuro */
+        );
+    background-size: 400% 400%;
+    animation: gradientMagico 12s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow: hidden;
+}
+
+/* ========== INSIGNIAS DEL COLEGIO EN LAS ESQUINAS SUPERIORES ========== */
+
+/* Insignia IZQUIERDA Superior */
+.insignia-izquierda {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 180px;
+    height: 180px;
+    z-index: 10000;
+    animation: insigniaFlotante 4s ease-in-out infinite, insigniaRotacion 8s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) 
+            drop-shadow(0 0 40px rgba(255, 215, 0, 0.4));
+    transition: all 0.3s ease;
+}
+
+.insignia-izquierda:hover {
+    transform: scale(1.2) rotate(360deg);
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1)) 
+            drop-shadow(0 0 60px rgba(255, 215, 0, 0.6));
+}
+
+/* Insignia DERECHA Superior */
+.insignia-derecha {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 180px;
+    height: 180px;
+    z-index: 10000;
+    animation: insigniaFlotante 4s ease-in-out infinite 2s, insigniaRotacion 8s linear infinite reverse;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) 
+            drop-shadow(0 0 40px rgba(255, 215, 0, 0.4));
+    transition: all 0.3s ease;
+}
+
+.insignia-derecha:hover {
+    transform: scale(1.2) rotate(-360deg);
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1)) 
+            drop-shadow(0 0 60px rgba(255, 215, 0, 0.6));
+}
+
+/* Contenedor de la imagen de la insignia - SIN CÍRCULO DE FONDO */
+.insignia-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* ELIMINADO: border-radius, background, padding, border */
+    position: relative;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* Borde animado dorado ALREDEDOR de la insignia (no circular) */
+.insignia-izquierda::before,
+.insignia-derecha::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, 
+        #FFD700 0%, 
+        #FFA500 15%,
+        #FFD700 30%, 
+        #FF8C00 45%,
+        #FFD700 60%,
+        #FFA500 75%,
+        #FFD700 100%);
+    /* CAMBIADO: border-radius eliminado para que siga la forma de la imagen */
+    z-index: -1;
+    animation: bordeGiratorio 3s linear infinite;
+    opacity: 0.8;
+    filter: blur(8px);
+}
+
+@keyframes insigniaFlotante {
+    0%, 100% { 
+        transform: translateY(0) scale(1);
+    }
+    50% { 
+        transform: translateY(-15px) scale(1.05);
+    }
+}
+
+@keyframes insigniaRotacion {
+    0% { 
+        transform: rotate(0deg);
+    }
+    100% { 
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bordeGiratorio {
+    0% { 
+        transform: rotate(0deg);
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.3);
+    }
+    100% { 
+        transform: rotate(360deg);
+        filter: brightness(1);
+    }
+}
+
+/* Efecto de pulso en las insignias - SIN FORMA CIRCULAR */
+.insignia-izquierda::after,
+.insignia-derecha::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    /* ELIMINADO: border-radius para que siga la forma natural */
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.5) 0%, rgba(255, 215, 0, 0.2) 50%, transparent 70%);
+    animation: pulsoBrillo 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulsoBrillo {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.6;
+    }
+}
+
+/* ========== FIN INSIGNIAS ========== */
+
+/* ESTRELLAS FLOTANTES EN LA PARTE INFERIOR - MARQUESINA INFINITA */
+.portada::before {
+    content: '✨ ⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐';
+    position: fixed;           /* ← CAMBIO 1: absolute → fixed */
+    bottom: 20px;
+    left: 0;
+    width: 100%;               /* ← CAMBIO 2: 300% → 100% */
+    font-size: 2.5em;
+    opacity: 0.7;
+    animation: marquesinaInfinita 20s linear infinite;  /* ← CAMBIO 3: nuevo nombre */
+    white-space: nowrap;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    overflow: hidden;          /* ← CAMBIO 4: línea agregada */
+    z-index: 10001;            /* ← CAMBIO 5: línea agregada */
+}
+
+/* EMOJIS FESTIVOS FLOTANDO EN LA PARTE INFERIOR - MARQUESINA INFINITA */
+.portada::after {
+    content: '🎈 🎪 🎨 🎭 🎯 🎊 🎉 🎪 🎈 🎨 🎭 🎯 🎊 🎉 🎪 🎈 🎨 🎭 🎯 🎊 🎈 🎪 🎨 🎭 🎯 🎊 🎉 🎪 🎈 🎨';
+    position: fixed;           /* ← CAMBIO 1: absolute → fixed */
+    bottom: 80px;
+    left: 0;                   /* ← CAMBIO 2: right → left */
+    width: 100%;               /* ← CAMBIO 3: 300% → 100% */
+    font-size: 2.2em;
+    opacity: 0.6;
+    animation: marquesinaInfinitaReverse 25s linear infinite;  /* ← CAMBIO 4: nuevo nombre */
+    white-space: nowrap;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+    overflow: hidden;          /* ← CAMBIO 5: línea agregada */
+    z-index: 10001;            /* ← CAMBIO 6: línea agregada */
+}
+
+@keyframes gradientMagico {
+    0% { 
+        background-position: 0% 50%;
+        filter: brightness(1) saturate(1.3);
+    }
+    25% { 
+        background-position: 50% 100%;
+        filter: brightness(1.1) saturate(1.4);
+    }
+    50% { 
+        background-position: 100% 50%;
+        filter: brightness(1.2) saturate(1.5);
+    }
+    75% { 
+        background-position: 50% 0%;
+        filter: brightness(1.1) saturate(1.4);
+    }
+    100% { 
+        background-position: 0% 50%;
+        filter: brightness(1) saturate(1.3);
+    }
+}
+
+/* ANIMACIÓN DE MARQUESINA INFINITA (de derecha a izquierda) */
+@keyframes marquesinaInfinita {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* ANIMACIÓN DE MARQUESINA INFINITA REVERSA (de izquierda a derecha) */
+@keyframes marquesinaInfinitaReverse {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* EFECTO ZOOM AL INICIO - ANIMACIÓN DE ENTRADA ESPECTACULAR */
+.portada-container {
+    background: linear-gradient(145deg, 
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 250, 205, 0.95) 50%,
+        rgba(255, 255, 255, 0.98) 100%
+    );
+    border-radius: 30px;
+    padding: 45px;
+    box-shadow: 
+        0 25px 60px rgba(90, 0, 0, 0.5),
+        0 0 0 8px rgba(255, 215, 0, 0.7),
+        0 0 0 12px rgba(180, 20, 60, 0.5),
+        inset 0 0 30px rgba(255, 215, 0, 0.2);
+    text-align: center;
+    max-width: 550px;
+    width: 90%;
+    border: 6px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+    /* ANIMACIÓN DE ZOOM INICIAL */
+    animation: zoomInicial 1.5s ease-out, contenedorPulso 3s ease-in-out infinite 1.5s;
+    transform-origin: center center;
+}
+
+/* ANIMACIÓN DE ZOOM ESPECTACULAR AL CARGAR */
+@keyframes zoomInicial {
+    0% { 
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.15) rotate(10deg);
+        opacity: 0.8;
+    }
+    75% {
+        transform: scale(0.95) rotate(-5deg);
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes contenedorPulso {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 25px 60px rgba(90, 0, 0, 0.5),
+            0 0 0 8px rgba(255, 215, 0, 0.7),
+            0 0 0 12px rgba(180, 20, 60, 0.5);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 
+            0 30px 70px rgba(90, 0, 0, 0.6),
+            0 0 0 10px rgba(255, 215, 0, 0.9),
+            0 0 0 15px rgba(180, 20, 60, 0.6),
+            0 0 50px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* Efecto de destellos mágicos */
+.portada-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 30%),
+        radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 20%);
+    animation: destellosMagicos 5s linear infinite;
+}
+
+@keyframes destellosMagicos {
+    0% { 
+        transform: rotate(0deg) scale(1);
+        opacity: 0.4;
+    }
+    50% { 
+        transform: rotate(180deg) scale(1.1);
+        opacity: 0.7;
+    }
+    100% { 
+        transform: rotate(360deg) scale(1);
+        opacity: 0.4;
+    }
+}
+
+.titulo-portada {
+    font-size: 3em;
+    font-weight: 900;
+    background: linear-gradient(45deg, 
+        #5C0000 0%,      /* Granate muy oscuro */
+        #8B0000 20%,     /* Rojo oscuro */
+        #DC143C 40%,     /* Crimson */
+        #FF6347 60%,     /* Rojo tomate */
+        #FFA500 80%,     /* Naranja */
+        #FFD700 100%     /* Amarillo dorado */
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    text-shadow: 
+        3px 3px 0px rgba(90, 0, 0, 0.4),
+        -2px -2px 0px rgba(255, 215, 0, 0.4);
+    animation: tituloArcoiris 3s linear infinite, saltoAlegre 2s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 2px;
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
+}
+
+@keyframes tituloArcoiris {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes saltoAlegre {
+    0%, 20%, 50%, 80%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+    }
+    10% { 
+        transform: translateY(-15px) rotate(-3deg); 
+    }
+    30% { 
+        transform: translateY(-10px) rotate(3deg); 
+    }
+    40% { 
+        transform: translateY(-15px) rotate(-2deg); 
+    }
+    60% { 
+        transform: translateY(-8px) rotate(2deg); 
+    }
+}
+
+.subtitulo-portada {
+    font-size: 2.2em;
+    font-weight: bold;
+    background: linear-gradient(90deg, 
+        #5C0000 0%,      /* Granate muy oscuro */
+        #8B0000 25%,     /* Rojo oscuro */
+        #B22222 50%,     /* Rojo ladrillo */
+        #8B0000 75%,     /* Rojo oscuro */
+        #5C0000 100%     /* Granate muy oscuro */
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 35px;
+    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.4);
+    position: relative;
+    z-index: 1;
+    animation: subituloBrello 2s ease-in-out infinite;
+    letter-spacing: 1px;
+}
+
+@keyframes subituloBrello {
+    0%, 100% { 
+        filter: brightness(1);
+        transform: scale(1);
+    }
+    50% { 
+        filter: brightness(1.3);
+        transform: scale(1.04);
+    }
+}
+
+.formulario-portada {
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.campo-grupo {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.campo-label {
+    display: block;
+    font-size: 1.2em;
+    color: #5C0000;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.4);
+}
+
+.campo-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 3px solid #FFD700;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    background: linear-gradient(to right, #FFFACD, #FFF8DC);
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
+}
+
+.campo-input:focus {
+    outline: none;
+    border-color: #8B0000;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.4);
+    transform: scale(1.03);
+    background: #FFFEF0;
+}
+
+.boton-empezar {
+    background: linear-gradient(45deg, #5C0000, #8B0000, #B22222, #DC143C);
+    background-size: 200% auto;
+    color: white;
+    font-size: 1.6em;
+    font-weight: 900;
+    padding: 18px 50px;
+    border: 4px solid #FFD700;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    box-shadow: 
+        0 10px 30px rgba(90, 0, 0, 0.6),
+        0 0 25px rgba(255, 215, 0, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+    animation: botonBrillo 2s ease-in-out infinite;
+}
+
+@keyframes botonBrillo {
+    0%, 100% { 
+        background-position: 0% center;
+        box-shadow: 
+            0 10px 30px rgba(90, 0, 0, 0.6),
+            0 0 25px rgba(255, 215, 0, 0.5);
+    }
+    50% { 
+        background-position: 100% center;
+        box-shadow: 
+            0 10px 30px rgba(90, 0, 0, 0.7),
+            0 0 35px rgba(255, 215, 0, 0.7);
+    }
+}
+
+.boton-empezar:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 15px 40px rgba(90, 0, 0, 0.7),
+        0 0 35px rgba(255, 215, 0, 0.7),
+        0 0 60px rgba(255, 215, 0, 0.4);
+    border-color: #FFA500;
+}
+
+.boton-empezar:active {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+        0 8px 20px rgba(90, 0, 0, 0.5),
+        0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.decoracion {
+    position: absolute;
+    font-size: 3.5em;
+    opacity: 0.5;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
+}
+
+.decoracion:nth-child(1) {
+    top: 10px;
+    left: 10px;
+    animation-delay: 0s;
+}
+
+.decoracion:nth-child(2) {
+    top: 10px;
+    right: 10px;
+    animation-delay: 1s;
+}
+
+.decoracion:nth-child(3) {
+    bottom: 10px;
+    left: 10px;
+    animation-delay: 2s;
+}
+
+.decoracion:nth-child(4) {
+    bottom: 10px;
+    right: 10px;
+    animation-delay: 1.5s;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1); 
+    }
+    25% { 
+        transform: translateY(-20px) rotate(90deg) scale(1.15); 
+    }
+    50% { 
+        transform: translateY(-30px) rotate(180deg) scale(1.2); 
+    }
+    75% { 
+        transform: translateY(-20px) rotate(270deg) scale(1.15); 
+    }
+}
+
+.contenido-principal {
+    display: none;
+}
+
+.contenido-principal.activo {
+    display: block;
+}
+
+.portada.oculta {
+    display: none;
+}
+
+/* Estilos para mensajes de validación */
+.mensaje-error {
+    color: #8B0000;
+    font-size: 0.95em;
+    margin-top: 5px;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+}
+
+.campo-error {
+    border-color: #8B0000 !important;
+    background: #FFE4E1 !important;
+    animation: errorShake 0.5s ease;
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Estilo responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .insignia-izquierda, .insignia-derecha {
+        width: 80px;
+        height: 80px;
+        top: 10px;
+    }
+    .insignia-izquierda {
+        left: 10px;
+    }
+    .insignia-derecha {
+        right: 10px;
+    }
+}
+
+/* Contenedor de confeti y bombas */
+.confeti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99999;
+    overflow: hidden;
+}
+
+/* Animación de confeti */
+.confeti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f0f;
+    top: -10px;
+    animation: caerConfeti 3s linear forwards;
+    opacity: 1;
+}
+
+/* Animación de bombas/cascarones */
+.bomba {
+    position: absolute;
+    font-size: 40px;
+    top: -50px;
+    animation: caerBomba 2.5s ease-in forwards;
+    opacity: 1;
+}
+
+/* Explosión de la bomba */
+.explosion {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,140,0,0.6) 30%, transparent 70%);
+    animation: explotar 0.6s ease-out forwards;
+    pointer-events: none;
+}
+
+/* Partículas de explosión */
+.particula {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: volarParticula 1s ease-out forwards;
+}
+
+/* Keyframes para caída de confeti */
+@keyframes caerConfeti {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0.3;
+    }
+}
+
+/* Keyframes para caída de bombas */
+@keyframes caerBomba {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(85vh) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+/* Keyframes para explosión */
+@keyframes explotar {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* Keyframes para partículas */
+@keyframes volarParticula {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Texto de celebración */
+.texto-celebracion {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 
+        0 0 10px #FF6B6B,
+        0 0 20px #FF6B6B,
+        0 0 30px #FF6B6B,
+        0 0 40px #FFD700,
+        0 0 70px #FFD700,
+        0 0 80px #FFD700,
+        0 0 100px #FFD700;
+    z-index: 100000;
+    pointer-events: none;
+    animation: pulsoTexto 0.5s ease-in-out infinite alternate, aparecerTexto 0.5s ease-out;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+@keyframes pulsoTexto {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+@keyframes aparecerTexto {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+</style>
+
+</head>
+<body >
+
+
+<!-- PORTADA -->
+<div class="portada" id="portada">
+    
+    <!-- ========== INSIGNIAS DEL COLEGIO ========== -->
+    <!-- INSIGNIA IZQUIERDA -->
+    <div class="insignia-izquierda">
+        <!-- Imagen real de la insignia del Colegio Mesones Muro -->
+        <img src="Recursos/insignia.png" alt="Insignia Mesones Muro" class="insignia-img">
+    </div>
+    
+    <!-- INSIGNIA DERECHA -->
+    <div class="insignia-derecha">
+        <!-- Imagen real de la insignia del Colegio Mesones Muro -->
+        <img src="Recursos/insignia.png" alt="Insignia Mesones Muro" class="insignia-img">
+    </div>
+    <!-- ========== FIN INSIGNIAS ========== -->
+    
+    <div class="portada-container">
+        <div class="decoracion">🐝</div>
+        <div class="decoracion">🐞</div>
+        <div class="decoracion">🌻</div>
+        <div class="decoracion">🍃</div>
+        
+        <h1 class="titulo-portada">¡Bienvenidos!</h1>
+        <h2 class="subtitulo-portada">La Hormiga y la Cigarra</h2>
+        
+        <div class="formulario-portada">
+            <div class="campo-grupo">
+                <label class="campo-label" for="nombres">Nombres:</label>
+                <input type="text" id="nombres" class="campo-input" placeholder="Escribe tus nombres aquí">
+                <div class="mensaje-error" id="error-nombres"></div>
+            </div>
+            
+            <div class="campo-grupo">
+                <label class="campo-label" for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" class="campo-input" placeholder="Escribe tus apellidos aquí">
+                <div class="mensaje-error" id="error-apellidos"></div>
+            </div>
+            
+            <div class="campo-grupo">
+                <label class="campo-label" for="grado">Grado y Sección:</label>
+                <input type="text" id="grado" class="campo-input" placeholder="Ejemplo: 3° A">
+                <div class="mensaje-error" id="error-grado"></div>
+            </div>
+        </div>
+        
+        <button class="boton-empezar" onclick="empezarActividad()">
+            🎯   A JUGAR    🎯
+        </button>
+    </div>
+</div>
+
+<div id="porcentajeResultado" 
+     style="font-size:18px; font-weight:bold; color:blue; margin:10px 0;">
+</div>
+
+<!-- Contenedor del botón enviar -->
+<div id="botonEnviarContainer" style="display: none; text-align: center; margin: 20px 0;">
+    <button id="botonEnviar" onclick="enviarDatosAGoogle()" 
+            style="
+                background: linear-gradient(45deg, #28a745, #20c997);
+                color: white;
+                font-size: 1.3em;
+                font-weight: bold;
+                padding: 12px 30px;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                font-family: 'Comic Sans MS', cursive, sans-serif;
+                box-shadow: 0 8px 15px rgba(40, 167, 69, 0.4);
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+            "
+            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 25px rgba(40, 167, 69, 0.5)'"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 15px rgba(40, 167, 69, 0.4)'"
+            onmousedown="this.style.transform='translateY(0)'"
+    >
+        📤 Enviar Resultados 📤
+    </button>
+    <div style="font-size: 0.9em; color: #666; margin-top: 10px;">
+        Haz clic para guardar tus resultados
+    </div>
+</div>
+
+
+<!-- CONTENIDO PRINCIPAL (el resto del contenido permanece igual) -->
+
+   <div class="pcllim" name='limbk' data-limc='{"version":"5.6","recursos":"Recursos","idioma":"ESP","licencia":"","corfondo":"FF8000","corbanda":"A21A06","cornavega":"A21A06","cormensaxes":"000000","cortexto":"311AFF","titulo":"Comprensión Lectora","subtitulo":"La hormiga y la cigarra","autor":"Manuel Antonio Manayay Callaca","iden":"Manuerick","ben":"CORRECTO","mal":"INCORRECTO"}'>
+      <div class="pclpreload"></div>
+   <button class="pclbtbr"></button>
+   <div class="pclbarra">
+      <div class="pclbns">			 
+         <button class="pclbot lbt-full" >&#9713;</button>
+         <button class="pclbot lbt-infor" >i</button>
+         <button class="pclbot lbt-menu" >&#9636;</button>
+         <button class="pclbot lbt-axd" >?</button>
+      </div>
+      <div class="pclnum">1</div>
+      <div class="pclbni">
+         <button class="pclbot nav lbt-bck"><img src="./sclim/at.png" class="clim-tam" alt='&#10094;'></button>
+         <button class="pclbot nav lbt-frw"><img src="./sclim/ad.png" class="clim-tam" alt='&#10095;'></button>  						            
+      </div>
+   </div>
+   <div class="pclfondo"></div>
+   <div class="pclcorpo" >
+      <div class="pclsuper" >Comprensión Lectora</div>
+      <div class="pclavance" ></div>
+      <div class="pclsub"  ><div class="pclsubtx">La hormiga y la cigarra</div></div>
+      <div class="pclind"></div>
+      <div class="pclbase">
+<!-- pi -->
+	  
+         
+	<!-- 1 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"imaxetexto","id":"1","imaxe":"Recursos/1Hormigacigarra.jpg","posx":"0","posy":"0"}}'>
+               <div name="limact" >
+		 <div class="cltexto-b"> <div class="cltexto-im" style="left:0px ;top:0px ;"><img src="Recursos/1Hormigacigarra.jpg" ></div></div>
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 2 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"imaxetexto","id":"2","imaxe":"Recursos/escena1.png","posx":"0","posy":"0"}}'>
+               <div name="limact" >
+		 <div class="cltexto-b"> <div class="cltexto-im" style="left:0px ;top:0px ;"><img src="Recursos/escena1.png" ></div></div>
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 3 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"imaxetexto","id":"3","imaxe":"Recursos/escena2.png","posx":"0","posy":"0"}}'>
+               <div name="limact" >
+		 <div class="cltexto-b"> <div class="cltexto-im" style="left:0px ;top:0px ;"><img src="Recursos/escena2.png" ></div></div>
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 4 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"imaxetexto","id":"4","imaxe":"Recursos/escena3.png","posx":"0","posy":"0"}}'>
+               <div name="limact" >
+		 <div class="cltexto-b"> <div class="cltexto-im" style="left:0px ;top:0px ;"><img src="Recursos/escena3.png" ></div></div>
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 5 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"imaxetexto","id":"5","imaxe":"Recursos/escena4.png","posx":"0","posy":"0"}}'>
+               <div name="limact" >
+		 <div class="cltexto-b"> <div class="cltexto-im" style="left:0px ;top:0px ;"><img src="Recursos/escena4.png" ></div></div>
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 6 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"imaxetexto","id":"6","imaxe":"Recursos/escena5.png","posx":"0","posy":"0"}}'>
+               <div name="limact" >
+		 <div class="cltexto-b"> <div class="cltexto-im" style="left:0px ;top:0px ;"><img src="Recursos/escena5.png" ></div></div>
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 7 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"imaxetexto","id":"7","imaxe":"Recursos/escena6.jpg","posx":"0","posy":"0"}}'>
+               <div name="limact" >
+		 <div class="cltexto-b"> <div class="cltexto-im" style="left:0px ;top:0px ;"><img src="Recursos/escena6.jpg" ></div></div>
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 8 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"puzzle","id":"8","txcabe":"Arma el rompecabezas","imaxe":"Recursos/1Hormigacigarra.jpg","filas":"3","columnas":"3","reixa":"1","forma":"1"}}'>
+               <div name="limact" >
+		
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 9 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"parellas","id":"9","txcabe":"Busca las imágenes iguales","imaxes":["Recursos/Azucar2.jpg","Recursos/Botella.jpg","Recursos/Roca.jpg","Recursos/Cuchara.jpg","Recursos/Arroz.jpg","Recursos/Hojas.jpg"],"cfondo":"FF8000","ctapa":"EB1434","tempo":"90","modo":"0"}}'>
+               <div name="limact" >
+		
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 10 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"secreta","id":"10","txcabe":"Dale clic en las letras para formar la palabra","imaxe":"Recursos/Cigarra.jpg","texto":"¿Cómo se llama este personaje?","palabras":"Cigarra","modo":"0","forma":"0"}}'>
+               <div name="limact" >
+		
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 11 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"secreta","id":"11","txcabe":"Dale clic en las letras para formar la palabra","imaxe":"Recursos/Hormiga.jpg","texto":"¿Cómo se llama este personaje?","palabras":"Hormiga","modo":"0","forma":"0"}}'>
+               <div name="limact" >
+		
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 12 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"sopa","id":"12","txcabe":"Busca las palabras","modo":"1","palabras":["sol","luna","puma","lana","gato","loma","mesa","pepa"],"enunciado":"1","colorea":"0","cadro":"0","tam":"16"}}'>
+               <div name="limact" >
+		
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+<!-- 13 -->
+         <div name="limpax"  class="pclcont">
+            <div name="limpanel" data-limc='{"properties": { "type":"clasificarimx","id":"13","txcabe":"Clasifica las imágenes","imaxes":["Recursos/Arroz.jpg","Recursos/Azucar.jpg","Recursos/Hojas.jpg","Recursos/Botella.jpg","Recursos/Cuchara.jpg","Recursos/Roca.jpg"],"caixas":["1","1","1","2","2","2"],"txcaixas":["Si come","No come"],"imfondo":["Recursos/Hormiga.jpg","Recursos/Hormiga2.jpg"],"trnsimf":["100","100"],"cfondo":"FF8000","cadro":"1","modo":"0"}}'>
+               <div name="limact" >
+		
+	       </div>
+            </div>
+         </div>
+	<!--  -->
+
+      </div>
+   </div>
+</div>
+
+
+
+<script>
+function empezarActividad() {
+    // Obtener valores de los campos
+    const nombres = document.getElementById('nombres').value.trim();
+    const apellidos = document.getElementById('apellidos').value.trim();
+    const grado = document.getElementById('grado').value.trim();
+    
+    // Limpiar mensajes de error previos
+    clearErrors();
+    
+    // Validar campos
+    let hasErrors = false;
+    
+    if (!nombres) {
+        showError('nombres', 'Por favor, escribe tus nombres');
+        hasErrors = true;
+    }
+    
+    if (!apellidos) {
+        showError('apellidos', 'Por favor, escribe tus apellidos');
+        hasErrors = true;
+    }
+    
+    if (!grado) {
+        showError('grado', 'Por favor, escribe tu grado y sección');
+        hasErrors = true;
+    }
+    
+    // Si hay errores, no continuar
+    if (hasErrors) {
+        return;
+    }
+    
+    // Guardar información del estudiante
+    sessionStorage.setItem('estudiante_nombres', nombres);
+    sessionStorage.setItem('estudiante_apellidos', apellidos);
+    sessionStorage.setItem('estudiante_grado', grado);
+    
+    // Ocultar portada y mostrar contenido principal
+    document.getElementById('portada').classList.add('oculta');
+
+    
+    // Inicializar el contenido principal si es necesario
+    initializeLimActivity();
+}
+
+function showError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    const errorDiv = document.getElementById('error-' + fieldId);
+    
+    field.classList.add('campo-error');
+    errorDiv.textContent = message;
+}
+
+function clearErrors() {
+    const fields = ['nombres', 'apellidos', 'grado'];
+    fields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        const errorDiv = document.getElementById('error-' + fieldId);
+        
+        field.classList.remove('campo-error');
+        errorDiv.textContent = '';
+    });
+}
+
+// Configuración - REEMPLAZA CON TU URL DE GOOGLE APPS SCRIPT
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwMAQEQePleKE_NbPpOCW4_o_J8vQEjh8yh74GAfEBcaKYf6BTQCukiVDuIPy4dcKVzEw/exec';
+
+// Función para enviar datos a Google Sheets
+async function enviarDatosAGoogle() {
+    try {
+        // Obtener datos del estudiante
+        const nombres = sessionStorage.getItem('estudiante_nombres') || '';
+        const apellidos = sessionStorage.getItem('estudiante_apellidos') || '';
+        const grado = sessionStorage.getItem('estudiante_grado') || '';
+        
+        // Obtener porcentaje de resultados
+        const porcentajeElement = document.getElementById('porcentajeResultado');
+        let porcentaje = '0%';
+        
+        if (porcentajeElement && porcentajeElement.textContent.trim()) {
+            porcentaje = porcentajeElement.textContent.trim();
+        }
+        
+        // Validar que tengamos los datos básicos
+        if (!nombres || !apellidos || !grado) {
+            alert('Error: Faltan datos del estudiante. Por favor, recarga la página e ingresa tus datos nuevamente.');
+            return;
+        }
+        
+        // Mostrar mensaje de envío
+        const botonEnviar = document.getElementById('botonEnviar');
+        const mensajeOriginal = botonEnviar.textContent;
+        botonEnviar.textContent = 'Enviando...';
+        botonEnviar.disabled = true;
+        
+        // Preparar datos para enviar
+        const datos = {
+            nombres: nombres,
+            apellidos: apellidos,
+            grado: grado,
+            porcentaje: porcentaje
+        };
+        
+        console.log('Enviando datos:', datos);
+        
+        // Enviar datos a Google Sheets
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Importante para evitar problemas de CORS
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos)
+        });
+        
+        // REPRODUCIR SONIDO YEA.MP3
+        // ============================================
+        const audio = new Audio('./Recursos/yea.mp3');
+        audio.volume = 0.7; // Volumen al 70%
+        audio.play().catch(error => {
+            console.log('Error al reproducir audio:', error);
+        });
+        // ============================================
+        // Como usamos no-cors, asumimos que se envió correctamente
+
+        // Lanzar celebración primero
+        lanzarCelebracion();
+        
+        // Mostrar alert después de un pequeño delay
+        setTimeout(() => {
+            alert('¡Datos enviados correctamente! ✅\n\n' +
+                  'Estudiante: ' + nombres + ' ' + apellidos + '\n' +
+                  'Grado: ' + grado + '\n' +
+                  'Resultado: ' + porcentaje);
+        }, 500);
+        
+        // Restaurar botón
+        botonEnviar.textContent = '✅ Enviado';
+        botonEnviar.style.backgroundColor = '#28a745';
+        
+    } catch (error) {
+        console.error('Error al enviar datos:', error);
+        alert('Hubo un problema al enviar los datos. Por favor, inténtalo de nuevo.');
+        
+        // Restaurar botón
+        const botonEnviar = document.getElementById('botonEnviar');
+        botonEnviar.textContent = 'Enviar Resultados';
+        botonEnviar.disabled = false;
+    }
+}
+
+// Función para crear animación de confeti y bombas
+function lanzarCelebracion() {
+    // Crear contenedor
+    const container = document.createElement('div');
+    container.className = 'confeti-container';
+    document.body.appendChild(container);
+    
+    // Crear texto de celebración
+    const textoCelebracion = document.createElement('div');
+    textoCelebracion.className = 'texto-celebracion';
+    textoCelebracion.textContent = '¡REGISTRADO!🎉';
+    document.body.appendChild(textoCelebracion);
+    
+    // Colores vibrantes para el confeti
+    const colores = [
+        '#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', 
+        '#FF1493', '#00CED1', '#FF4500', '#9B59B6',
+        '#FFD700', '#FF69B4', '#00FF7F', '#FF6347'
+    ];
+    
+    // Emojis de bombas y cascarones
+    const emojiBombas = ['🎊', '🎉', '🎈', '💥', '✨', '⭐', '🌟', '💫'];
+    
+    // Lanzar confeti (200 piezas)
+    for (let i = 0; i < 200; i++) {
+        setTimeout(() => {
+            crearConfeti(container, colores);
+        }, Math.random() * 1000);
+    }
+    
+    // Lanzar bombas (30 bombas)
+    for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+            crearBomba(container, emojiBombas);
+        }, Math.random() * 1500);
+    }
+}
+
+// Función para crear confeti individual
+function crearConfeti(container, colores) {
+    const confeti = document.createElement('div');
+    confeti.className = 'confeti';
+    
+    // Posición aleatoria
+    confeti.style.left = Math.random() * 100 + '%';
+    
+    // Color aleatorio
+    confeti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+    
+    // Tamaño aleatorio
+    const tamano = Math.random() * 10 + 5;
+    confeti.style.width = tamano + 'px';
+    confeti.style.height = tamano + 'px';
+    
+    // Formas variadas (círculo o cuadrado)
+    if (Math.random() > 0.5) {
+        confeti.style.borderRadius = '50%';
+    }
+    
+    // Duración aleatoria
+    confeti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    
+    // Retardo aleatorio
+    confeti.style.animationDelay = Math.random() * 0.5 + 's';
+    
+    container.appendChild(confeti);
+}
+
+// Función para crear bomba/cascarón
+function crearBomba(container, emojiBombas) {
+    const bomba = document.createElement('div');
+    bomba.className = 'bomba';
+    
+    // Emoji aleatorio
+    bomba.textContent = emojiBombas[Math.floor(Math.random() * emojiBombas.length)];
+    
+    // Posición aleatoria
+    const posX = Math.random() * 90 + 5; // Entre 5% y 95%
+    bomba.style.left = posX + '%';
+    
+    // Tamaño aleatorio
+    bomba.style.fontSize = (Math.random() * 30 + 30) + 'px';
+    
+    // Duración aleatoria
+    bomba.style.animationDuration = (Math.random() * 1 + 2) + 's';
+    
+    container.appendChild(bomba);
+    
+    // Crear explosión cuando llegue abajo
+    setTimeout(() => {
+        crearExplosion(container, posX);
+        bomba.remove();
+    }, 2300);
+}
+
+// Función para crear explosión
+function crearExplosion(container, posX) {
+    const explosion = document.createElement('div');
+    explosion.className = 'explosion';
+    explosion.style.left = posX + '%';
+    explosion.style.top = '80%';
+    explosion.style.transform = 'translate(-50%, -50%)';
+    
+    container.appendChild(explosion);
+    
+    // Crear partículas de la explosión
+    const coloresExplosion = ['#FFD700', '#FF6B6B', '#4D96FF', '#6BCB77', '#FF1493'];
+    for (let i = 0; i < 20; i++) {
+        const particula = document.createElement('div');
+        particula.className = 'particula';
+        particula.style.backgroundColor = coloresExplosion[Math.floor(Math.random() * coloresExplosion.length)];
+        particula.style.left = '50%';
+        particula.style.top = '50%';
+        
+        // Dirección aleatoria para las partículas
+        const angulo = (Math.PI * 2 * i) / 20;
+        const distancia = Math.random() * 100 + 50;
+        const tx = Math.cos(angulo) * distancia;
+        const ty = Math.sin(angulo) * distancia;
+        
+        particula.style.setProperty('--tx', tx + 'px');
+        particula.style.setProperty('--ty', ty + 'px');
+        
+        explosion.appendChild(particula);
+    }
+    
+    // Eliminar explosión después de la animación
+    setTimeout(() => explosion.remove(), 1000);
+}
+
+// Función para mostrar el botón de enviar cuando la actividad esté completa
+function mostrarBotonEnviar() {
+    const botonContainer = document.getElementById('botonEnviarContainer');
+    if (botonContainer) {
+        botonContainer.style.display = 'block';
+    }
+}
+
+
+
+// Inicializar verificación cuando se inicia la actividad
+function initializeLimActivity() {
+    console.log('Actividad iniciada para:', 
+        sessionStorage.getItem('estudiante_nombres'),
+        sessionStorage.getItem('estudiante_apellidos'),
+        sessionStorage.getItem('estudiante_grado')
+    );
+    
+    // Iniciar verificación de actividad completa
+    verificarActividadCompleta();
+}
+
+
+// Agregar evento Enter para enviar el formulario
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('.campo-input');
+    inputs.forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                empezarActividad();
+            }
+        });
+    });
+
+// --- NUEVO CÓDIGO ---
+    const botonInfo = document.querySelector('.lbt-infor');
+    if (botonInfo) {
+        botonInfo.addEventListener('click', mostrarBotonEnviar);
+    }
+});
+</script>
+
+</body>
+</html>
